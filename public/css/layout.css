@@ -17,10 +17,11 @@
         margin: 0px;
         padding: 0px;
         background-image: url('/static/clip2_bg.jpg');
+        /* background-color: black; */
         background-size: cover;
         /* background-position-y: -400px; */
         background-repeat:no-repeat;
-        opacity: 0.5;
+        opacity: 0.38;
         z-index: -1;
     }
 

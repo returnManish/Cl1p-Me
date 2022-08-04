@@ -57,7 +57,7 @@
     border-radius: 10%;
     margin-left: 1.5vw;
 
-    padding: 7px;
+    padding: 10px;
 }
 
 .btn-fill-color{
@@ -87,8 +87,27 @@
         </div>
         <div class="form">
             <input type="text" placeholder="Enter line here" id="linkdata">
-            <button class="btn btn-fill-color">Create</button>
+            <button id = "btn" class="btn btn-fill-color">Move</button>
         </div>
     </div>
 
 </body>
+
+
+ <!-- axios fetch -->
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+ <script>
+     let btn = document.getElementById('btn');
+
+     btn.addEventListener('click' , function(e){
+
+         // used when make form due to reloading problem
+         e.preventDefault();
+
+         let linkdata = document.getElementById('linkdata').value;
+         window.location = `/${linkdata}`;
+        //  let resp =await axios.post('/auth/signup' , {email,name,password});
+        //  console.log('resp->', resp);
+
+     })
+ </script>

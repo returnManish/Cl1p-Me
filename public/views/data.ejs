@@ -1,0 +1,189 @@
+<style>
+
+    .bigbox{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem ;
+    }
+/* 
+    .io{
+        margin: auto;
+    } */
+    .udata{
+        width: 70vw;
+        height: 60vh;
+        outline: none;
+        /* color: black; */
+    }
+
+    .sidebar{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .io{   
+        width: 20vw;
+        height: 4vh;
+        background: none;
+        border: 3px solid white;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        transition-property: all;
+        transition-duration: 3s;
+    }
+
+    /* .io:hover,
+    .io:focus{
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+    } */
+
+    .btn{
+    /* width: 10vw; */
+    /* height: 6vh; */
+    background: #af011d;
+    color: white;
+    /* border: 2px solid #7f0014; */
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-radius: 15%;
+    margin: 1vh 5.5vw; 
+
+    padding: 7px;
+    
+}
+
+.btn-fill-color{
+    border: none;
+    box-shadow: inset 0px 0px 0px none;
+    transition-property: all;
+    transition-duration: 0.6s;
+}
+
+.btn-fill-color:hover{
+    justify-content: center;
+    box-shadow: inset 10vw 0px 0px white;
+    color: red;
+    border-radius: 10px;
+    text-decoration: underline;
+}
+
+h2{
+    text-align: center;
+    text-decoration-line: underline;
+    color: white;
+    margin-top: 0px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+      }
+
+
+</style>
+
+<body>
+    <h2>Paste content below</h2>
+    <div class="bigbox">
+        <textarea  id="userData" class="udata" cols="30" rows="10" placeholder='Write here'>
+            <%= userContent%>
+        </textarea>
+            <div class="sidebar">
+                <input type="password" id="password" class="io" placeholder="Enter Password">
+                <button id= "btnUpd" class="btn btnUp btn-fill-color"> Update </button>
+                <button id= "btnDel" class="btn btnUp btn-fill-color"> Delete </button>
+            </div>
+        
+    </div>
+</body>
+
+
+<script>
+        let s = document.getElementById('userData').value;
+        console.log(s);
+        s = s.trim();
+        document.getElementById('userData').value = s;
+        console.log(s);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    
+    // updating content by sending data through axios
+    let btnUp = document.getElementById('btnUpd');
+
+    btnUp.addEventListener('click',async function(e) {
+        
+        // used when make form due to reloading problem
+        e.preventDefault();
+        
+        // console.log(window.location);
+        // console.log(window.location.pathname);
+
+        let content = document.getElementById('userData').value;
+        
+        let pass = document.getElementById('password').value;
+        let currLink = window.location.pathname;
+
+        if(content == ''){
+            alert('Content is empty. Write something')
+        }
+        else{
+            
+            // console.log(currLink);
+            let resp = await axios.patch(`${currLink}` , {content , pass , currLink});
+            console.log('resp->', resp);
+
+            if(resp.data == 'Err in password'){
+                alert('Incorrect Password')
+            }
+            else{
+                alert('data updated successfully');
+            }
+        }
+
+
+    });
+
+
+      // deleting content from db
+      let btnDel= document.getElementById('btnDel');
+
+    btnDel.addEventListener('click',async function(e) {
+        
+        let content = document.getElementById('userData').value;
+        
+        let pass = document.getElementById('password').value;
+        let currLink = window.location.pathname;
+
+        let resp = await axios.delete(`${currLink}` , 
+        {
+            data : {
+                content : content,
+                currLink: currLink,
+                pass : pass
+            }
+        });
+            console.log('resp->', resp);
+
+            if(resp.data == 'Err in password'){
+                alert('Incorrect Password')
+            }
+            else{
+                //TODO
+                document.getElementById('userData').value = '';
+                document.getElementById('password').value = '';
+                alert('Deleted successfully');
+            }
+
+    });
+
+</script>
