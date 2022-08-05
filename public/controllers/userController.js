@@ -38,7 +38,7 @@ module.exports.loginUser = async function loginUser(req , res){
             let match = await bcrypt.compare(req.body.password , currUser.password); //decript
             if(match){
                 //TODO 
-                let uid = currUser['id']
+                let uid = currUser['id'];
                 let token = jwt.sign({payload:uid} , JWT_KEY); //token
                 res.cookie('login', token , {httpOnly:true});
                 res.cookie('username' , req.body.username ,{httpOnly:true} )
