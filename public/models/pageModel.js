@@ -25,10 +25,10 @@ const pageSchema = new mongoose.Schema({
         default:''
     },
     //TODO
-    // username: {
-    //     type: String, 
-    //     default: ''
-    // } 
+    username: {
+        type: String, 
+        default: ''
+    } 
 })
 
 const pageModel =  mongoose.model('pageModel',pageSchema);

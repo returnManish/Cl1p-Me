@@ -39,9 +39,10 @@ module.exports.loginUser = async function loginUser(req , res){
             if(match){
                 //TODO 
                 let uid = currUser['id'];
-                let token = jwt.sign({payload:uid} , JWT_KEY); //token
-                res.cookie('login', token , {httpOnly:true});
-                res.cookie('username' , req.body.username ,{httpOnly:true} )
+                // let token = jwt.sign({payload:uid} , JWT_KEY); //token
+                // res.cookie('login', token , {httpOnly:true});
+                // res.cookie('username' , req.body.username ,{httpOnly:true} )
+                res.cookie('username' , req.body.username );
                 return res.send('user Logged In successfully');
             }
             else{
