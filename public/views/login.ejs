@@ -94,13 +94,47 @@
             <div class="form">
                 <input type="text" class="io" placeholder="Enter your username" id="username">
                 <input type="password" class="io" placeholder="Enter your password" id="password">
-                <button  class="btn btn-fill-color">
+                <button id="btnLog" class="btn btn-fill-color">
                     Login Now
                 </button>
             </div>
         </div>
     </div>
 </body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    
+    let btnLog = document.getElementById('btnLog');
+
+    btnLog.addEventListener('click' ,async function(e){
+
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+
+        if(username == '' || password == ''){
+            alert('Fill all details');
+        }
+        else{
+
+            let resp = await axios.post('/login' , {username , password});
+
+            console.log('resp->' , resp);
+
+            if(resp.data != 'user Logged In successfully'){
+                let msg = resp.data;
+                alert(msg);
+            }
+            else{
+                alert('user Logged In successfully');
+                window.location = '/';
+            }
+        }
+
+    })
+</script>
 
 
 

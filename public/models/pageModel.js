@@ -23,8 +23,12 @@ const pageSchema = new mongoose.Schema({
     password:{
         type:String,
         default:''
-    }
-
+    },
+    //TODO
+    // username: {
+    //     type: String, 
+    //     default: ''
+    // } 
 })
 
 const pageModel =  mongoose.model('pageModel',pageSchema);

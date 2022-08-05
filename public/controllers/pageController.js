@@ -5,13 +5,15 @@ const pageModel = require('../models/pageModel');
 // }
 
 module.exports.getHome = getHome = (req, res) => {
-     return res.render('index.ejs', { title: 'home' })
+     let currUser = req.cookies.username; //todo
+     if (!currUser) currUser = '';
+     return res.render('index.ejs', { title: 'CL1p-home' , username: currUser})//todo
 }
 
 module.exports.fetchPage = async function fetchPage(req, res) {
      try {
-          // let currUser = req.cookies.username;
-          // if (!currUser) currUser = '';
+          let currUser = req.cookies.username; //todo
+          if (!currUser) currUser = '';
           let link = req.params.id;
           // console.log(typeof link);
           let pageOfData = await pageModel.findOne(
@@ -31,7 +33,9 @@ module.exports.fetchPage = async function fetchPage(req, res) {
           return res.render('data.ejs' ,{
                title : `${link}`,
                userContent : content,
-               // username: currUser
+               username: currUser //todo
+               // username: ''
+
           });
      }
      catch(err) {
@@ -42,7 +46,7 @@ module.exports.fetchPage = async function fetchPage(req, res) {
 
 module.exports.updatePage = async function updatePage(req , res) {
      try{
-          //TODO
+
           let link = req.body.currLink.substr(1);
           // console.log(link);
           let page = await pageModel.findOne({pageId : link});
@@ -53,6 +57,7 @@ module.exports.updatePage = async function updatePage(req , res) {
 
                     let updatedContent = await pageModel.findByIdAndUpdate(page.id , {
                          pageContent : req.body.content,
+                         userName : req.cookies.username
                          //TODO
                     })
 
@@ -67,7 +72,8 @@ module.exports.updatePage = async function updatePage(req , res) {
                let newpage = await pageModel.create({
                     pageId : link,
                     pageContent : req.body.content,
-                    password : req.body.pass
+                    password : req.body.pass,
+                    username : req.cookies.username
                     //TODO
                })
           }
