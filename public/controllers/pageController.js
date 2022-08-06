@@ -1,4 +1,5 @@
 const pageModel = require('../models/pageModel');
+const reviewModel = require('../models/reviewModel');
 
 // module.exports.getHome = function getHome(req, res) {
 //      res.render('index.ejs', { title: 'home'});
@@ -117,4 +118,27 @@ module.exports.delPage = async function delPage(req , res) {
           console.log(err);
           return res.send(err.message);
      }
+}
+
+module.exports.addReview =async function addReview(req , res){
+     try{
+          let data = req.body;
+          let review = reviewModel.create({
+               name:data.name,
+               phone:data.phone,
+               email:data.email,
+               message:data.mess
+          })
+
+          if(review){
+               res.send('Form submitted');
+          }
+          else{
+               res.send('err from server');
+          }
+     }
+     catch(err){
+          res.send(err.message);
+     }
+    
 }

@@ -57,3 +57,11 @@ module.exports.loginUser = async function loginUser(req , res){
     }
 
 };
+
+module.exports.logoutUser =async function logoutUser(req , res){
+    res.cookie('login', ' ', {maxAge:1});
+    res.cookie('username', ' ', {maxAge:1});
+    // alert('Logged Out successfully')
+    // res.send('Logged Out successfully');
+    return res.redirect('/')
+};

@@ -1,7 +1,7 @@
 const express = require('express');
 const pageRouter = express.Router();
 
-const { getHome, fetchPage, updatePage, delPage } = require('../controllers/pageController');
+const { getHome, fetchPage, updatePage, delPage ,addReview} = require('../controllers/pageController');
 // const getHome = require('../controllers/pageController');
 
 const { createUser, loginUser, logoutUser } = require('../controllers/userController');
@@ -23,6 +23,9 @@ pageRouter.route('/login')
 
     .post(loginUser)
 
+pageRouter.route('/logout')
+.get(logoutUser)  
+
 
 pageRouter.route('/contact')
     .get((req, res) => {
@@ -31,6 +34,7 @@ pageRouter.route('/contact')
         if (!currUser) currUser = '';
         return res.render('contact.ejs', { title: 'contact', username: currUser })//TDO
     })
+    .post(addReview);
 //TODO
 
 
