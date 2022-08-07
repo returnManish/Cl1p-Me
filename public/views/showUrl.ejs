@@ -1,0 +1,79 @@
+
+<style>
+    /* body{
+        /* background-color:; */
+    /* } */ 
+    .content{
+        color: white;
+        margin: auto;
+        width: 50%; 
+        background-color: rgb(103, 103, 187);
+        box-shadow: 6px 6px 25px blue;
+        /* border: 6px solid blue; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .content h1{
+        margin-block-end: 0px;
+    }
+    .content p{
+        margin-block-start: 0px;
+    }
+    .content h2{
+        margin-block-end: 0px;
+    }
+    ul{
+        margin-block-start: 0px;
+    }
+
+    .content li a{
+        color:blue;
+        background-color: white;
+        border-radius: 11%;
+        padding: 0px 3px;
+        transition-property: all;
+        transition-duration: 0.7s;
+    }
+    .content li{
+        margin: 5px;
+    }
+   
+
+    .content li a:hover{
+        color:white;
+        background-color: transparent;
+        border-radius: 11%;
+        padding: 0px 3px;
+        /* text-decoration: none; */
+    }
+    .content li a:active{
+        color:blue;
+    }
+
+</style>
+
+
+<div class="content">
+
+    <% if (username){%>
+        <h1>Links associated with user <u><%=username%></u> </h1> 
+    
+        <p>(Total links are <%=allLinks.length%>)</p> 
+        
+        <h2><%=msg%>.</h2>
+        <ul>
+            <% for(var i=0 ; i < allLinks.length ; i++) {%>
+                <li><a href="../<%=allLinks[i]%>" target="_blank">
+                        <%=allLinks[i]%>
+                    </a></li>
+                <% } %>
+        </ul>
+    <%} else { %>
+        <h1><%=err%></h1>
+        <h2><%=msg%>.</h2>
+        <%} 
+    %>
+</div>

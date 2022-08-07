@@ -1,17 +1,105 @@
 <style>
-
-.meme{
-    width: 100%;
-    margin: auto;
-}
-
-img{
-        width: 38vw;
-        height: 55vh;
+    /* 
+body::after{
+    content: '';
+    background-color: black;
+    
+} */
+    .content {
+        width: 85%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
+    .content p {
+        /* margin-top: 40px; */
+        margin-bottom: 20px;
+        padding: 0px 40px;
+        font-family: 'Varela Round';
+        text-align: center;
+        font-size: clamp(1.3rem, 3vw, 1.8rem);
+    }
+
+    .content h1 {
+        border-bottom: 3px solid red;
+        font-family: 'Varela Round';
+        font-size: clamp(1.4rem, 3vw, 2rem);
+
+    }
+
+    .content ul {
+        list-style: none;
+        border: 2px solid white;
+        width: 80%;
+    }
+
+    .content li {
+        padding: 10px 40px;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-family: 'Varela Round';
+        display: inline-block;
+    }
+
+
+    .alert {
+        font-family: 'Varela Round', cursive;
+        padding: 20px;
+        background-color: none;
+        /* Red */
+        color: white;
+        margin-bottom: 15px;
+        transition: 0.3s;
+    }
+
+    .alert:hover {
+        /* background-color: red; */
+        text-decoration: underline red 4px;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    .content::before {
+        content: '';
+        position: absolute;
+        height: fit-content;
+        min-height: 150vh;
+        width: 100%;
+        z-index: -1;
+        background-color: black;
+    }
+
+    /* .content{
+        background-color: black;
+      } */
 </style>
+
 <body>
-    <h1>About</h1>
-    <h2>Work in progress</h2>
+    <div class="content">
+        <!-- <h1>About</h1> -->
+        <p>
+            Cl1pme provides easiest way to instantly share user desired data between internet connected devices through
+            user generated short links.
+            Can be used as an online ClipBoard to store/share desired text with just a short URL. Full control over
+            Content.</p>
+
+        <h1>Detailed Instructions:</h1>
+        <ul>
+            <li class="alert">The name you wish to use as a short URL should be typed into the text box on the home page.
+                then click the Move button to continue.</li>
+            <li class="alert">The user will be sent to the created shorthand page as a result. In the text box, type the
+                text you wish to CLIP. Password can be linked for security if requried. Click update button to continue
+                after this.</li>
+            <li class="alert">The information you have saved at your shorthand link is accessible whenever you return.
+                Using the appropriate buttons and the previously established password, if any, you may alter or remove
+                the material further.</li>
+            <li class="alert">&#8226; The logged-in users can now see all their updated posts by clicking on the username in the navbar.</li>
+            <!-- <li class="alert">Repeat</li> -->
+        </ul>
+
+
+    </div>
+
 </body>

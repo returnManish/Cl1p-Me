@@ -1,10 +1,10 @@
 const express = require('express');
 const pageRouter = express.Router();
 
-const { getHome, fetchPage, updatePage, delPage ,addReview} = require('../controllers/pageController');
+const { getHome, fetchPage, updatePage, delPage, addReview } = require('../controllers/pageController');
 // const getHome = require('../controllers/pageController');
 
-const { createUser, loginUser, logoutUser } = require('../controllers/userController');
+const { createUser, loginUser, logoutUser ,showAllUrls} = require('../controllers/userController');
 
 
 
@@ -24,7 +24,7 @@ pageRouter.route('/login')
     .post(loginUser)
 
 pageRouter.route('/logout')
-.get(logoutUser)  
+    .get(logoutUser)
 
 
 pageRouter.route('/contact')
@@ -48,6 +48,9 @@ pageRouter.route('/about')
 
 
 pageRouter.route('/').get(getHome);
+
+pageRouter.route('/user/:id')//id refers to user name
+    .get(showAllUrls);
 
 pageRouter.route('/:id')
     .get(fetchPage)

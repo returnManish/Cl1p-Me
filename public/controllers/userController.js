@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT_KEY = 'C++321'
 
+const pageModel = require('../models/pageModel');
+
+
 module.exports.createUser = async function createUser(req , res){
     try{
         let salt =await bcrypt.genSalt(10);
@@ -65,3 +68,58 @@ module.exports.logoutUser =async function logoutUser(req , res){
     // res.send('Logged Out successfully');
     return res.redirect('/')
 };
+
+module.exports.showAllUrls = async function showAllUrls(req , res){
+    try{
+            let unknownuser  = req.params.id;
+            let loggedin_user  = req.cookies.username; //id->user
+            // user1 is same as user
+            // console.log(user1);
+            // console.log(user);
+            if(!loggedin_user){
+                return res.render('showUrl' , {
+                    title: "err",
+                    username : '',
+                    allLinks : [],
+                    msg : 'Access Denied. Login to see',
+                    err : 'Error 401'
+                });
+            }
+            if(unknownuser != loggedin_user){
+                return res.render('showUrl' , {
+                    title: "err",
+                    username : '',
+                    allLinks : [],
+                    msg : 'Access Denied',
+                    err : 'Error 403'
+                });
+            }
+            let pages_info = await pageModel.find({username:loggedin_user});//full schema
+            // console.log(allUsers_info)
+            let allLinks = [];
+            for(let i = 0 ; i<pages_info.length ; i++){
+                allLinks[i] = pages_info[i].pageId;
+                // console.log(allLinks)
+            }
+
+
+            let msg = '';
+            if(pages_info.length != 0){
+                msg = 'List of all links updated'
+            }
+            else{
+                msg  = 'No links found. Plz create links to see'
+            }
+            // console.log(allLinks.length)
+            return res.render('showUrl' , {
+                title: "MyUrls",
+                username : loggedin_user,
+                allLinks : allLinks,
+                msg : msg
+            });
+    }
+    catch(err){
+        res.send(err.message)
+    }
+    
+}

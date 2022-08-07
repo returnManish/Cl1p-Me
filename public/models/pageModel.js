@@ -24,7 +24,7 @@ const pageSchema = new mongoose.Schema({
         type:String,
         default:''
     },
-    //TODO
+    //TODO use to show links for logged in user
     username: {
         type: String, 
         default: ''
